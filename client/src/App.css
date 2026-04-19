@@ -1,38 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=Chango&family=Nunito:ital,wght@0,200..1000;1,200..1000&family=Source+Code+Pro:ital,wght@0,200..900;1,200..900&display=swap");
-
 @import "tailwindcss";
-
-@theme {
-  --font-mono: "Nunito", sans-serif;
-  --font-heading: "Chango", sans-serif;
-  --font-base: "Source Code Pro", monospace;
-
-  --color-primary: #007bff;
-  --color-basic: white;
-  --color-secondary: #6c757d;
-  --color-accent: #17a2b8;
-  --color-success: #28a745;
-  --color-warning: #ffc107;
-  --color-danger: #dc3545;
-  --color-info: #0dcaf0;
-
-  --color-black: #3c3c43;
-  --color-pink: #ffc1da;
-  --color-green: #e8f49d;
-  --color-green2: #c1f4da;
-  --color-blue: #baf2ff;
-  --color-purple: #c9c5ff;
-  --color-yellow: #fff685;
-  --color-orange: #ffcb6b;
-  --color-grey: #f3f3f3;
-
-  /* Neutral Colors */
-  --color-background: #fcf5e5;
-  --color-surface: #f8f9fa;
-  --color-border: #dee2e6;
-  --color-text: #3c3c43;
-  --color-text-light: #6c757d;
-}
 
 .navTitle {
   @apply font-black font-mono justify-items-center;
@@ -40,6 +6,10 @@
 
 .disabledLink {
   @apply opacity-65 pointer-events-none;
+}
+
+.subTitle{
+  @apply font-mono font-black text-black;
 }
 
 .button {

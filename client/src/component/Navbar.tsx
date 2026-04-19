@@ -3,9 +3,9 @@ import { Link } from 'react-router-dom';
 export const Navbar = () => {
   return (
     
-      <div className="flex bg-white p-2 min-h-12.5">
+      <div className="flex bg-white p-2 min-h-12.5 w-screen absolute top-0">
         <div className="flex">
-          <img alt="trippy-logo" src="../logo.svg" width={100} />
+          <img alt="trippy-logo" src="../logo.svg" width={130} />
         </div>
         <div className="flex ml-auto navTitle gap-3 items-center">
           <div className="flex"><Link to="/"><h4>Trips</h4></Link></div>

@@ -1,7 +1,34 @@
+@import url("https://fonts.googleapis.com/css2?family=Chango&family=Nunito:ital,wght@0,200..1000;1,200..1000&family=Source+Code+Pro:ital,wght@0,200..900;1,200..900&display=swap");
+
 @import "tailwindcss";
 
-:root {
-  --text: #6b6375;
+@theme{
+  
+  --font-family-mono: "Nunito", sans-serif;
+  --font-family-heading: "Chango", sans-serif;
+  --font-family-base: "Source Code Pro", monospace;
+
+  --color-primary: #007bff;
+  --color-basic: white;
+  --color-secondary: #6c757d;
+  --color-accent: #17a2b8;
+  --color-success: #28a745;
+  --color-warning: #ffc107;
+  --color-danger: #dc3545;
+  --color-info: #0dcaf0;
+
+  --color-black: #3c3c43;
+  --color-pink: #ffc1da;
+  --color-green: #e8f49d;
+  --color-green2: #c1f4da;
+  --color-blue: #baf2ff;
+  --color-purple: #c9c5ff;
+  --color-yellow: #fff685;
+  --color-orange: #ffcb6b;
+  --color-grey: #f3f3f3;
+
+
+  --text: var(--color-black);
   --text-h: #08060d;
   --bg: #fff;
   --border: #e5e4e7;
@@ -13,10 +40,13 @@
   --shadow:
     rgba(0, 0, 0, 0.1) 0 10px 15px -3px, rgba(0, 0, 0, 0.05) 0 4px 6px -2px;
 
-  --sans: system-ui, "Segoe UI", Roboto, sans-serif;
-  --heading: system-ui, "Segoe UI", Roboto, sans-serif;
-  --mono: ui-monospace, Consolas, monospace;
+  --sans: "Nunito", sans-serif;
+  --heading: "Chango", sans-serif;
+  --mono: "Source Code Pro", monospace;
+}
 
+@layer base {
+:root {
   font: 18px/145% var(--sans);
   letter-spacing: 0.18px;
   color-scheme: light dark;
@@ -53,18 +83,36 @@
   }
 }
 
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  user-select: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  caret-color: transparent;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
 #root {
   width: 100dvw;
-  margin: 0 auto;
   min-height: 100dvh;
   display: flex;
   flex-direction: column;
   box-sizing: border-box;
+  background-color: #fcf5e5!important;
+  font-family:var(--font-family-mono);
+  overflow-x: hidden;
 }
 
 body {
   margin: 0;
-  background-color: #fcf5e5;
+  background-color: #fcf5e5!important;
 }
 
 h1,
@@ -110,3 +158,6 @@ code {
   padding: 4px 8px;
   background: var(--code-bg);
 }
+}
+
+@import "./App.css";
