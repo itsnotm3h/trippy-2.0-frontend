@@ -1,28 +1,43 @@
-import { Link } from 'react-router-dom';
+import { Mail, Paid } from '@mui/icons-material';
+import { AppBar, Box, Button, Chip, Stack, Toolbar, Typography } from '@mui/material';
+import { useState } from 'react';
+import { LoginButton } from './ui/LoginButton';
+
+//Pages will have the name and icon
+export const pages = [
+  { navTitle: 'Trips', link: "", isDisabled: false },
+  { navTitle: 'Dashboard', link: "", isDisabled: true },
+  { navTitle: 'Explore', link: "", isDisabled: true }
+];
+export const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
 
 export const Navbar = () => {
+
+  const [loggedIn, setIsLoggedIn] = useState(false);
+
   return (
-    
-      <div className="flex bg-white p-2 min-h-12.5 w-screen absolute top-0">
-        <div className="flex">
-          <img alt="trippy-logo" src="../logo.svg" width={130} />
-        </div>
-        <div className="flex ml-auto navTitle gap-3 items-center">
-          <div className="flex"><Link to="/"><h4>Trips</h4></Link></div>
-          <div className="flex disabledLink"><h4>Dashboard</h4></div>
-          <div className="flex disabledLink"><h4>Explore</h4></div>
-          <div className="flex disabledLink">
-            <span className="material-symbols-outlined">
-              mail
-            </span>
-          </div>
-          <div className="flex  disabledLink">
-            <span className="material-symbols-outlined">
-              paid
-            </span>
-          </div>
-          <div className="flex"><button className="button">Login</button></div>
-        </div>
-      </div>
+
+    <AppBar position='static'>
+      <Toolbar variant='dense'>
+        <img alt="trippy-logo" src="../logo.svg" width={130} />
+        <Stack direction="row" sx={{ ml: "auto", gap: 2, alignItems:"center" }}>
+          {pages.map(item => (
+            <Typography key={`navItem_${item.navTitle}`} variant='h4'
+              sx={{
+                opacity: item.isDisabled ? "0.5" : "1",
+                cursor: item.isDisabled ? "default" : "pointer"
+              }}>
+              {item.navTitle}
+            </Typography>
+          ))}
+          {loggedIn && (<>
+            <Mail sx={{cursor:"pointer"}}/>
+            <Paid sx={{cursor:"pointer"}}/>
+          </>
+          )}
+          <LoginButton loggedIn={loggedIn} />
+        </Stack>
+      </Toolbar>
+    </AppBar>
   );
 };

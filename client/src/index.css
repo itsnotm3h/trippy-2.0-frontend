@@ -1,9 +1,7 @@
 @import url("https://fonts.googleapis.com/css2?family=Chango&family=Nunito:ital,wght@0,200..1000;1,200..1000&family=Source+Code+Pro:ital,wght@0,200..900;1,200..900&display=swap");
 
-@import "tailwindcss";
 
-@theme{
-  
+:root {
   --font-family-mono: "Nunito", sans-serif;
   --font-family-heading: "Chango", sans-serif;
   --font-family-base: "Source Code Pro", monospace;
@@ -27,7 +25,6 @@
   --color-orange: #ffcb6b;
   --color-grey: #f3f3f3;
 
-
   --text: var(--color-black);
   --text-h: #08060d;
   --bg: #fff;
@@ -37,17 +34,18 @@
   --accent-bg: rgba(170, 59, 255, 0.1);
   --accent-border: rgba(170, 59, 255, 0.5);
   --social-bg: rgba(244, 243, 236, 0.5);
-  --shadow:
-    rgba(0, 0, 0, 0.1) 0 10px 15px -3px, rgba(0, 0, 0, 0.05) 0 4px 6px -2px;
+  --shadow: rgba(0, 0, 0, 0.1) 0 10px 15px -3px, rgba(0, 0, 0, 0.05) 0 4px 6px -2px;
 
-  --sans: "Nunito", sans-serif;
-  --heading: "Chango", sans-serif;
-  --mono: "Source Code Pro", monospace;
-}
 
-@layer base {
-:root {
-  font: 18px/145% var(--sans);
+    /* Neutral Colors */
+  --color-background: #fcf5e5;
+  --color-surface: #f8f9fa;
+  --color-border: #dee2e6;
+  --color-text: #3c3c43;
+  --color-text-light: #6c757d;
+
+  /* font-size: 18px; */
+  line-height: 145%;
   letter-spacing: 0.18px;
   color-scheme: light dark;
   color: var(--text);
@@ -56,9 +54,49 @@
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  
 
-  @media (max-width: 1024px) {
+  --font-size-xs: 0.75rem; /* 12px */
+  --font-size-sm: 0.875rem; /* 14px */
+  --font-size-md: 1rem; /* 16px */
+  --font-size-lg: 1.25rem; /* 20px */
+  --font-size-xl: 1.5rem; /* 24px */
+  --font-size-xxl: 2rem; /* 32px */
+
+  --transition-fast: 150ms ease-in-out;
+  --transition-medium: 300ms ease-in-out;
+  --transition-slow: 500ms ease-in-out;
+
+   /* === Border === */
+  --border-radius-sm: 4px;
+  --border-radius-md: 8px;
+  --border-radius-lg: 16px;
+
+    /* === Spacing === */
+  --space-xxs:4px;
+  --space-xs: 8px;
+  --space-sm:  12px ;
+  --space-md:16px;
+  --space-lg:  24px;
+  --space-xl:  32px;
+  --space-xxl:  48px;
+  
+  
+  
+  --form-font-family: var(--font-family-base);
+  --form-font-size: var(--font-size-sm);
+  --form-color: var(--color-text);
+  --form-background-color: var(--color-surface);
+  --form-border-color: var(--color-border);
+  --form-border-radius: var(--border-radius-md);
+  --form-padding-y: var(--space-xs);
+  --form-padding-x: var(--space-sm);
+  --form-focus-border-color: var(--color-primary);
+  --form-focus-shadow: 0 0 0 3px rgba(0, 123, 255, 0.25);
+  --form-placeholder-color: var(--color-text-light);
+}
+
+@media (max-width: 1024px) {
+  :root {
     font-size: 16px;
   }
 }
@@ -74,8 +112,7 @@
     --accent-bg: rgba(192, 132, 252, 0.15);
     --accent-border: rgba(192, 132, 252, 0.5);
     --social-bg: rgba(47, 48, 58, 0.5);
-    --shadow:
-      rgba(0, 0, 0, 0.4) 0 10px 15px -3px, rgba(0, 0, 0, 0.25) 0 4px 6px -2px;
+    --shadow: rgba(0, 0, 0, 0.4) 0 10px 15px -3px, rgba(0, 0, 0, 0.25) 0 4px 6px -2px;
   }
 
   #social .button-icon {
@@ -83,6 +120,7 @@
   }
 }
 
+*,
 *::before,
 *::after {
   box-sizing: border-box;
@@ -92,7 +130,7 @@
   -webkit-user-select: none;
   -moz-user-select: none;
   -ms-user-select: none;
-  caret-color: transparent;
+  /* caret-color: transparent; */
 }
 
 html {
@@ -105,48 +143,38 @@ html {
   display: flex;
   flex-direction: column;
   box-sizing: border-box;
-  background-color: #fcf5e5!important;
-  font-family:var(--font-family-mono);
+  background-color: #fcf5e5 !important;
+  font-family: var(--font-family-mono);
   overflow-x: hidden;
 }
 
 body {
   margin: 0;
-  background-color: #fcf5e5!important;
+  background-color: #fcf5e5 !important;
+  font-family: var(--font-family-mono);
+  font-size: 16px;
+  font-style: normal;
+
 }
 
-h1,
-h2 {
-  font-family: var(--heading);
-  font-weight: 500;
-  color: var(--text-h);
-}
 
-h1 {
-  font-size: 56px;
-  letter-spacing: -1.68px;
-  margin: 32px 0;
-  @media (max-width: 1024px) {
+@media (max-width: 1024px) {
+  h1 {
     font-size: 36px;
     margin: 20px 0;
   }
-}
-h2 {
-  font-size: 24px;
-  line-height: 118%;
-  letter-spacing: -0.24px;
-  margin: 0 0 8px;
-  @media (max-width: 1024px) {
+  h2 {
     font-size: 20px;
   }
 }
+
 p {
   margin: 0;
 }
 
 code,
 .counter {
-  font-family: var(--mono);
+  font-family: var(--font-family-mono);
   display: inline-flex;
   border-radius: 4px;
   color: var(--text-h);
@@ -158,6 +186,4 @@ code {
   padding: 4px 8px;
   background: var(--code-bg);
 }
-}
 
-@import "./App.css";
