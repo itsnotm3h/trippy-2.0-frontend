@@ -1,7 +1,10 @@
 import { Mail, Paid } from '@mui/icons-material';
-import { AppBar, Box, Button, Chip, Stack, Toolbar, Typography } from '@mui/material';
-import { useState } from 'react';
-import { LoginButton } from './ui/LoginButton';
+import { AppBar, Container, Stack, Toolbar, Typography } from '@mui/material';
+import { LoginButton } from './LoginButton';
+import { useAuthStore } from '@/store/useAuthStore';
+import { useLogoutUser } from '@/api/user/loginQueries';
+import { useNavigate } from 'react-router-dom';
+import useAuth from '@/hooks/useAuth';
 
 //Pages will have the name and icon
 export const pages = [
@@ -13,10 +16,22 @@ export const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
 
 export const Navbar = () => {
 
-  const [loggedIn, setIsLoggedIn] = useState(false);
+
+
+  const {user, isLogin} = useAuth();
+
+  const navigate = useNavigate();
+
+  const {mutate} = useLogoutUser();
+
+  const handleLogout = ()=>{
+
+    if(isLogin) mutate();
+    navigate("/login");
+
+  }
 
   return (
-
     <AppBar position='static'>
       <Toolbar variant='dense'>
         <img alt="trippy-logo" src="../logo.svg" width={130} />
@@ -30,12 +45,12 @@ export const Navbar = () => {
               {item.navTitle}
             </Typography>
           ))}
-          {loggedIn && (<>
+          {user!=null && (<>
             <Mail sx={{cursor:"pointer"}}/>
             <Paid sx={{cursor:"pointer"}}/>
           </>
           )}
-          <LoginButton loggedIn={loggedIn} />
+          <LoginButton loggedIn={isLogin} onClick={handleLogout} />
         </Stack>
       </Toolbar>
     </AppBar>

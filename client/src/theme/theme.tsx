@@ -2,7 +2,7 @@ import { createTheme } from '@mui/material/styles';
 
 
 const baseTheme = createTheme({
-     palette: {
+    palette: {
         primary: { main: '#007bff' },
         secondary: { main: '#6c757d' },
         error: { main: '#dc3545' },
@@ -12,7 +12,7 @@ const baseTheme = createTheme({
     }
 })
 
-const theme = createTheme(baseTheme,{
+const theme = createTheme(baseTheme, {
     typography: {
         fontFamily: '"Source Code Pro", monospace',
         fontSize: 16,
@@ -54,7 +54,7 @@ const theme = createTheme(baseTheme,{
         body2: {
             fontFamily: '"Nunito", sans-serif',
             fontSize: '0.875rem',   // 14px
-        },
+        }
     },
 
     components: {
@@ -83,7 +83,7 @@ const theme = createTheme(baseTheme,{
                     padding: "2px",
                     borderColor: "var(--form-border-color)",
                     borderRadius: "var(--form-border-radius)",
-                    backgroundColor:"var(--form-background-color)",
+                    backgroundColor: "var(--form-background-color)",
                     fontSize: '0.9rem',
                 },
             },
@@ -103,10 +103,17 @@ const theme = createTheme(baseTheme,{
                 root: {
                     fontFamily: '"Source Code Pro", monospace',
                     fontSize: 'var(--font-size-sm)',
-                    borderRadius: 'var(--border-radius-lg)',
+                    borderRadius: '19px',
                     backgroundColor: 'var(--color-black)',
                     textTransform: 'none',
                     fontWeight: 400,
+                    transition: {
+                        backgroundColor: "var(--button-transition)"
+                    },
+                    transform: "var(--button-transition)",
+                    '&:hover': {
+                        backgroundColor: '#e98c00',
+                    }
                 },
             },
         },

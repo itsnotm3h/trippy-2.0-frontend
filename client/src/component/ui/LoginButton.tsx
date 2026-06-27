@@ -2,9 +2,10 @@ import { Chip, Stack } from "@mui/material"
 
 interface LoginButtonProps {
     loggedIn: boolean;
+    onClick : ()=>void;
 }
 
-export const LoginButton = ({ loggedIn }: LoginButtonProps) => {
+export const LoginButton = ({ loggedIn, onClick}: LoginButtonProps) => {
     return (
         <Stack>
             <Chip label={loggedIn ? "Logout" : "Login"} size='small' sx={{
@@ -23,7 +24,9 @@ export const LoginButton = ({ loggedIn }: LoginButtonProps) => {
                 '&:hover': {
                      backgroundColor: '#e98c00',
                 }
-            }} />
+            }} 
+            onClick={onClick}
+            />
         </Stack>
     )
 }

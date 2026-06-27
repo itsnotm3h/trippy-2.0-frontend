@@ -1,12 +1,57 @@
 import "./App.css";
-import { Navbar } from "./component/Navbar";
-import { LoginRegisterPage } from "./page/login/LoginRegisterPage";
+import axios from "axios";
+import GuestRoute from "./features/GuestRoute";
+import ProtectedRoute from "./features/ProtectedRoute";
+import { useLayoutEffect, useState } from "react";
+import { Navbar } from "./component/ui/Navbar";
+import { LoginPage } from "./pages/authenticate/LoginPage";
+import { useAuthStore } from "./store/useAuthStore";
+import { RegisterPage } from "./pages/authenticate/RegisterPage";
+import { Route, Routes } from "react-router-dom";
+import { TripsDashboardPage } from "./pages/tripsDashboard/TripsDashboardPage";
+import { TripsProvider } from "./pages/tripsDashboard/TripsContext";
 
 function App() {
+  const { setAuth, clearAuth } = useAuthStore();
+  const [isInitializing, setIsInitializing] = useState(true);
+
+  useLayoutEffect(() => {
+    const checkActiveSession = async () => {
+
+      try {
+        const response = await axios.post(`http://localhost:3000/api/authenticate/refreshToken`, {}, { withCredentials: true });
+        setAuth(response.data.accessToken, response.data.user);
+
+      } catch (error) {
+        console.log(error);
+        clearAuth();
+      }
+      finally {
+        setIsInitializing(false);
+      }
+
+    }
+
+    checkActiveSession()
+
+  }, [])
+
+  if (isInitializing) {
+    return (<></>)
+  }
+
   return (
     <>
       <Navbar />
-      <LoginRegisterPage />
+      <Routes>
+        <Route element={<GuestRoute />}>
+          <Route path="/login" element={<LoginPage />} />
+          <Route path="/register" element={<RegisterPage />} />
+        </Route>
+        <Route element={<ProtectedRoute />}>
+            <Route path="/trip-dashboard" element={<TripsProvider><TripsDashboardPage /></TripsProvider>} />
+        </Route>
+      </Routes>
     </>
   );
 }

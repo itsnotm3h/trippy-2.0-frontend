@@ -1,10 +1,10 @@
-import { Box, Card, CardContent, Stack, Typography } from "@mui/material"
-import { LoginPanel } from "./LoginPanel"
+import { Stack } from "@mui/material"
 import { FormProvider, useForm } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod";
 import { LoginSchema } from "@/api/user/loginApi-validator";
+import { LoginPanel } from "./LoginPanel";
 
-export const LoginRegisterPage = () => {
+export const LoginPage = () => {
 
   const form = useForm({
         resolver: zodResolver(LoginSchema),
