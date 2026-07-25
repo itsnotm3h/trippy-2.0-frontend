@@ -10,6 +10,7 @@ import { RegisterPage } from "./pages/authenticate/RegisterPage";
 import { Route, Routes } from "react-router-dom";
 import { TripsDashboardPage } from "./pages/tripsDashboard/TripsDashboardPage";
 import { TripsProvider } from "./pages/tripsDashboard/TripsContext";
+import { GlobalModal } from "./component/layouts/GlobalModal";
 
 function App() {
   const { setAuth, clearAuth } = useAuthStore();
@@ -17,27 +18,26 @@ function App() {
 
   useLayoutEffect(() => {
     const checkActiveSession = async () => {
-
       try {
-        const response = await axios.post(`http://localhost:3000/api/authenticate/refreshToken`, {}, { withCredentials: true });
+        const response = await axios.post(
+          `http://localhost:3000/api/authenticate/refreshToken`,
+          {},
+          { withCredentials: true },
+        );
         setAuth(response.data.accessToken, response.data.user);
-
       } catch (error) {
         console.log(error);
         clearAuth();
-      }
-      finally {
+      } finally {
         setIsInitializing(false);
       }
+    };
 
-    }
-
-    checkActiveSession()
-
-  }, [])
+    checkActiveSession();
+  }, []);
 
   if (isInitializing) {
-    return (<></>)
+    return <></>;
   }
 
   return (
@@ -49,9 +49,17 @@ function App() {
           <Route path="/register" element={<RegisterPage />} />
         </Route>
         <Route element={<ProtectedRoute />}>
-            <Route path="/trip-dashboard" element={<TripsProvider><TripsDashboardPage /></TripsProvider>} />
+          <Route
+            path="/trip-dashboard"
+            element={
+              <TripsProvider>
+                <TripsDashboardPage />
+              </TripsProvider>
+            }
+          />
         </Route>
       </Routes>
+      <GlobalModal />
     </>
   );
 }

@@ -1,6 +1,5 @@
 @import url("https://fonts.googleapis.com/css2?family=Chango&family=Nunito:ital,wght@0,200..1000;1,200..1000&family=Source+Code+Pro:ital,wght@0,200..900;1,200..900&display=swap");
 
-
 :root {
   --font-family-mono: "Nunito", sans-serif;
   --font-family-heading: "Chango", sans-serif;
@@ -34,10 +33,10 @@
   --accent-bg: rgba(170, 59, 255, 0.1);
   --accent-border: rgba(170, 59, 255, 0.5);
   --social-bg: rgba(244, 243, 236, 0.5);
-  --shadow: rgba(0, 0, 0, 0.1) 0 10px 15px -3px, rgba(0, 0, 0, 0.05) 0 4px 6px -2px;
+  --shadow:
+    rgba(0, 0, 0, 0.1) 0 10px 15px -3px, rgba(0, 0, 0, 0.05) 0 4px 6px -2px;
 
-
-    /* Neutral Colors */
+  /* Neutral Colors */
   --color-background: #fcf5e5;
   --color-surface: #f8f9fa;
   --color-border: #dee2e6;
@@ -66,22 +65,20 @@
   --transition-medium: 300ms ease-in-out;
   --transition-slow: 500ms ease-in-out;
 
-   /* === Border === */
+  /* === Border === */
   --border-radius-sm: 4px;
   --border-radius-md: 8px;
   --border-radius-lg: 16px;
 
-    /* === Spacing === */
-  --space-xxs:4px;
+  /* === Spacing === */
+  --space-xxs: 4px;
   --space-xs: 8px;
-  --space-sm:  12px ;
-  --space-md:16px;
-  --space-lg:  24px;
-  --space-xl:  32px;
-  --space-xxl:  48px;
-  
-  
-  
+  --space-sm: 12px;
+  --space-md: 16px;
+  --space-lg: 24px;
+  --space-xl: 32px;
+  --space-xxl: 48px;
+
   --form-font-family: var(--font-family-base);
   --form-font-size: var(--font-size-sm);
   --form-color: var(--color-text);
@@ -112,7 +109,8 @@
     --accent-bg: rgba(192, 132, 252, 0.15);
     --accent-border: rgba(192, 132, 252, 0.5);
     --social-bg: rgba(47, 48, 58, 0.5);
-    --shadow: rgba(0, 0, 0, 0.4) 0 10px 15px -3px, rgba(0, 0, 0, 0.25) 0 4px 6px -2px;
+    --shadow:
+      rgba(0, 0, 0, 0.4) 0 10px 15px -3px, rgba(0, 0, 0, 0.25) 0 4px 6px -2px;
   }
 
   #social .button-icon {
@@ -138,7 +136,7 @@ html {
 }
 
 #root {
-  width: 100dvw;
+  /* width: 100vw; */
   min-height: 100dvh;
   display: flex;
   flex-direction: column;
@@ -154,9 +152,7 @@ body {
   font-family: var(--font-family-mono);
   font-size: 16px;
   font-style: normal;
-
 }
-
 
 @media (max-width: 1024px) {
   h1 {
@@ -186,4 +182,3 @@ code {
   padding: 4px 8px;
   background: var(--code-bg);
 }
-
