@@ -1,18 +1,24 @@
 import {
+  EditTripSchema,
   TRIP_TYPE,
+  TripSchema,
   type TripInfoResponseType,
 } from "@/api/trips/tripApi-validator";
+import { ConfirmationDialog } from "@/component/layouts/ConfirmationDialog";
+import { TripForm } from "@/features/TripForm/TripForm";
 import useAuth from "@/hooks/useAuth";
+import { useModalStore } from "@/store/useModalStore";
 import { DataFormatter } from "@/utils/DataFormatter";
 import {
+  Box,
   Card,
   CardContent,
-  CardMedia,
   Grid,
   Stack,
   Typography,
-  useTheme,
+
 } from "@mui/material";
+import type { Countries } from "country-to-currency";
 
 interface TripsCardProps {
   trip: TripInfoResponseType;
@@ -46,6 +52,35 @@ export const TripsCard = ({ trip, index }: TripsCardProps) => {
 
     return colors[index % colors.length];
   };
+
+  const { setModalSetting, openModal } = useModalStore()
+  const handleEdit = () => {
+
+    const editFormValues = EditTripSchema.parse(trip);
+
+    setModalSetting({
+      title: "",
+      size: "lg",
+      content: <TripForm title="Edit Trip" isEdit={true} editFormValues={editFormValues} />,
+    });
+    openModal();
+
+  }
+  const handleDelete = (trip:TripInfoResponseType) => {
+    setModalSetting({
+      title: "",
+      size: "xs",
+      content: 
+      <ConfirmationDialog title="Delete Trip" 
+      message={
+        <Stack sx={{textAlign:"center"}}>
+          You are about to delete this trip:
+          <Typography variant="h3" sx={{fontWeight:700}}>{trip.title} | {DataFormatter.formatCountry(trip.country)}</Typography>
+        </Stack>
+    } />,
+    });
+    openModal();
+  }
 
   return (
     <Grid size={{ xs: 12, sm: 6, md: 4, lg: 3, xl: 2 }}>
@@ -95,8 +130,8 @@ export const TripsCard = ({ trip, index }: TripsCardProps) => {
                 transition: "all 0.4s ease-in-out",
               }}
             >
-              <img src="../tileSetting.svg" width="26" />
-              <img src="../tileDelete.svg" width="26" />
+              <Box onClick={handleEdit}><img src="../tileSetting.svg" width="26" /></Box>
+              <Box onClick={() => handleDelete(trip)}><img src="../tileDelete.svg" width="26" /></Box>
             </Stack>
           )}
           <Stack
@@ -126,7 +161,7 @@ export const TripsCard = ({ trip, index }: TripsCardProps) => {
           }}
         >
           <Stack>
-            <Typography>{trip.country}</Typography>
+            <Typography>{DataFormatter.formatCountry(trip.country as Countries)}</Typography>
             <Typography sx={{ fontSize: "0.8rem" }}>{tripDuration}</Typography>
           </Stack>
           <Stack sx={{ ml: "auto" }}>

@@ -7,10 +7,11 @@ import { Navbar } from "./component/ui/Navbar";
 import { LoginPage } from "./pages/authenticate/LoginPage";
 import { useAuthStore } from "./store/useAuthStore";
 import { RegisterPage } from "./pages/authenticate/RegisterPage";
-import { Route, Routes } from "react-router-dom";
-import { TripsDashboardPage } from "./pages/tripsDashboard/TripsDashboardPage";
-import { TripsProvider } from "./pages/tripsDashboard/TripsContext";
+import { Navigate, Route, Routes } from "react-router-dom";
 import { GlobalModal } from "./component/layouts/GlobalModal";
+import { TripInformation } from "./pages/TripInformation/TripInformation";
+import { TripsProvider } from "./pages/TripsDashboard/TripsContext";
+import { TripsDashboardPage } from "./pages/TripsDashboard/TripsDashboardPage";
 
 function App() {
   const { setAuth, clearAuth } = useAuthStore();
@@ -43,7 +44,10 @@ function App() {
   return (
     <>
       <Navbar />
+      
       <Routes>
+        <Route path="/" element={<Navigate to="/login" replace />} />
+
         <Route element={<GuestRoute />}>
           <Route path="/login" element={<LoginPage />} />
           <Route path="/register" element={<RegisterPage />} />
@@ -56,6 +60,9 @@ function App() {
                 <TripsDashboardPage />
               </TripsProvider>
             }
+          />
+          <Route path="/trip-information/:id" 
+          element={<TripInformation/>}
           />
         </Route>
       </Routes>

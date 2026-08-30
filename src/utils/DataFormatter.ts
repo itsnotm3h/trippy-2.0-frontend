@@ -1,4 +1,10 @@
+import countryToCurrency, { type Countries } from "country-to-currency";
 import dayjs from "dayjs";
+import * as countries from "i18n-iso-countries";
+import enLocale from "i18n-iso-countries/langs/en.json";
+
+countries.registerLocale(enLocale);
+
 
 export const DataFormatter = {
   formatTripDuration: (startDate: string, endDate: string) => {
@@ -28,4 +34,11 @@ export const DataFormatter = {
     );
     return capitalized.join(" ").trim();
   },
+  formatCountry:(countryCode:string)=>{
+    
+      return countries.getName(countryCode, "en");
+  },
+  formatCurrency:(country:Countries)=>{
+      return countryToCurrency[country as Countries];
+  }
 };

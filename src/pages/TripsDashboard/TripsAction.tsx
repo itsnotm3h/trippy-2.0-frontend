@@ -8,21 +8,21 @@ import {
   Typography,
 } from "@mui/material";
 import { useForm, useWatch } from "react-hook-form";
-import { useTripsContext } from "./TripsContext";
 import { useModalStore } from "@/store/useModalStore";
-import { TripForm } from "@/features/EditTrip/TripForm";
+import { TripForm } from "@/features/TripForm/TripForm";
+import { useTripsContext } from "./TripsContext";
 
 export const TripsAction = () => {
-  const { register, watch } = useForm();
+  const { register } = useForm();
 
   const { setSearch } = useTripsContext();
   const { openModal, setModalSetting } = useModalStore();
 
   const handleAddTrips = () => {
     setModalSetting({
-      title: "New Trip",
+      title: "",
       size: "lg",
-      content: <TripForm />,
+      content: <TripForm title="Add New Trip" isEdit={false} />,
     });
     openModal();
   };

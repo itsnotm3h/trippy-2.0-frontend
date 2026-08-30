@@ -1,5 +1,8 @@
-import { TextField, useTheme, type SxProps, type Theme } from "@mui/material";
+import { InputAdornment, TextField, type SxProps, type Theme } from "@mui/material";
 import { useFormContext } from "react-hook-form";
+import { DataFormatter } from "@/utils/DataFormatter";
+
+
 
 interface GenericTextFieldProps {
   type?: string;
@@ -8,6 +11,7 @@ interface GenericTextFieldProps {
   required?: boolean;
   name: string;
   isStyling?: boolean;
+  unit?: string;
 }
 
 export const GenericTextField = ({
@@ -17,28 +21,35 @@ export const GenericTextField = ({
   name,
   required,
   isStyling,
+  unit
 }: GenericTextFieldProps) => {
   const {
     register,
+    watch,
     formState: { errors },
   } = useFormContext();
 
   const hasError = !!errors[name];
+  
+  const countryCode = watch("country");
 
-  const styling: SxProps<Theme> | undefined = !isStyling
+  const styling: SxProps<Theme> = isStyling != undefined
     ? {
-        "& .MuiOutlinedInput-root": {
-          background: "none",
-        },
-        "& .MuiInputBase-input": {
-          background: "none",
-          padding: 0,
-        },
-        "& .MuiOutlinedInput-notchedOutline": {
-          border: "none",
-        },
+      "& .MuiOutlinedInput-root": {
+        background: "none",
+      },
+      "& .MuiInputBase-input": {
+        background: "none",
+        padding: 0,
+      },
+      "& .MuiOutlinedInput-notchedOutline": {
+        border: "none",
+      },
+      "& .MuiFormHelperText-root":{
+        margin:0
       }
-    : undefined;
+    }
+    : {};
 
   return (
     <TextField
@@ -52,6 +63,11 @@ export const GenericTextField = ({
       required={required}
       {...register(`${name}`)}
       sx={styling}
+      slotProps={unit ? {
+        input: {
+          endAdornment: <InputAdornment position="end">{DataFormatter.formatCurrency(countryCode)}</InputAdornment>,
+        }
+      } : {}}
     />
   );
 };

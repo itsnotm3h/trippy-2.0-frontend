@@ -1,5 +1,5 @@
 import { useModalStore } from "@/store/useModalStore";
-import { Close } from "@mui/icons-material";
+import { Cancel} from "@mui/icons-material";
 import {
   Dialog,
   DialogContent,
@@ -21,7 +21,7 @@ export const GlobalModal = () => {
       <DialogTitle>
         <Stack direction={"row"}>
           <Typography variant="h3">{modalSetting.title}</Typography>
-          <Close sx={{ ml: "auto" }} onClick={() => closeModal()} />
+          <Cancel sx={{ ml: "auto" }} onClick={() => closeModal()} />
         </Stack>
       </DialogTitle>
       <DialogContent>{modalSetting.content}</DialogContent>
